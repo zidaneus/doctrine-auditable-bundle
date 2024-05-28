@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.6.10",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^11.1",
         "symfony/framework-bundle": "~5.4 || ~6.0 || ~7.0",
         "symfony/phpunit-bridge": "^6.0 || ~7.0",
         "symfony/security-bundle": "~5.4 || ~6.0 || ~7.0"

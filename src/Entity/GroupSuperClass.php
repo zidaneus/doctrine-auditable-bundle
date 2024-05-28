@@ -32,7 +32,7 @@ class GroupSuperClass
     /**
      * Date (time when change was registered in the system)
      */
-    #[Column(name: 'created_ts', type: Types::DATETIMETZ_IMMUTABLE, columnDefinition: 'TIMESTAMP NULL DEFAULT NULL')]
+    #[Column(name: 'created_ts', type: Types::DATETIME_IMMUTABLE, columnDefinition: 'TIMESTAMP NULL DEFAULT NULL')]
     protected DateTimeImmutable $createdTs;
 
     #[Column(name: 'username', type: Types::STRING, nullable: true)]

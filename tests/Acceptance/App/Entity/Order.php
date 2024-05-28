@@ -52,66 +52,46 @@ class Order
         $this->postedTs   = new DateTime();
     }
 
-    /**
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     */
     public function getCustomer(): string
     {
         return $this->customer;
     }
 
-    /**
-     */
     public function getTotalItems(): int
     {
         return $this->totalItems;
     }
 
-    /**
-     */
     public function setCustomer(string $customer): void
     {
         $this->customer = $customer;
     }
 
-    /**
-     */
     public function setTotalItems(int $totalItems): void
     {
         $this->totalItems = $totalItems;
     }
 
-    /**
-     */
     public function getPostedTs(): DateTime
     {
         return $this->postedTs;
     }
 
-    /**
-     */
     public function setPostedTs(DateTime $postedTs): void
     {
         $this->postedTs = $postedTs;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
     public function getExecutedTs(): ?DateTimeImmutable
     {
         return $this->executedTs;
     }
 
-    /**
-     * @param DateTimeImmutable|null $executedTs
-     */
     public function setExecutedTs(?DateTimeImmutable $executedTs): void
     {
         $this->executedTs = $executedTs;

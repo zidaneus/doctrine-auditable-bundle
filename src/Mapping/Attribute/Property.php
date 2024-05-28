@@ -14,7 +14,7 @@ namespace Gtt\Bundle\DoctrineAuditableBundle\Mapping\Attribute;
 use Attribute;
 
 /**
- * Attribute for auditable entity
+ * Attribute for auditable property
  */
 #[Attribute(Attribute::TARGET_PROPERTY)]
 final class Property

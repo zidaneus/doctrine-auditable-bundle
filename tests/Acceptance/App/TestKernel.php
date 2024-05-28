@@ -62,7 +62,7 @@ final class TestKernel extends Kernel implements CompilerPassInterface
     /**
      * @param callable(ContainerBuilder): void|null $compilerPass
      */
-    public function setCompilerPass(?callable $compilerPass)
+    public function setCompilerPass(?callable $compilerPass): void
     {
         $this->compilerPass = $compilerPass;
     }

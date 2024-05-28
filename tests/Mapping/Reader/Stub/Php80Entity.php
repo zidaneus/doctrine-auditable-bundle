@@ -16,10 +16,10 @@ use Gtt\Bundle\DoctrineAuditableBundle\Mapping\Attribute as Auditable;
 /**
  * Class Php80Entity
  */
-#[Auditable\Entity()]
+#[Auditable\Entity]
 final class Php80Entity extends AbstractEntity
 {
-    #[Auditable\Property()]
+    #[Auditable\Property]
     public $auditableProperty;
 
     public $notAuditableProperty;

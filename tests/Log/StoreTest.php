@@ -56,7 +56,7 @@ final class StoreTest extends TestCase
     {
         $doctrineRegistry = $this->getDoctrineRegistryMock();
         $doctrineRegistry
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(Stub\Entity::class)
             ->willReturn(null);
@@ -78,7 +78,7 @@ final class StoreTest extends TestCase
 
         $doctrineRegistry = $this->getDoctrineRegistryMock();
         $doctrineRegistry
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(Stub\Entity::class)
             ->willReturn($entityManager);
@@ -106,13 +106,13 @@ final class StoreTest extends TestCase
 
         $doctrineRegistry = $this->getDoctrineRegistryMock();
         $doctrineRegistry
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getManagerForClass')
             ->with(Stub\Entity::class)
             ->willReturn($entityManager);
 
         $onFlushEventArgs = $this->getOnFlushEventArgsMock();
-        $onFlushEventArgs->expects(self::once())->method('getObjectManager')->willReturn($entityManager);
+        $onFlushEventArgs->expects($this->once())->method('getObjectManager')->willReturn($entityManager);
 
         $store = new Store($doctrineRegistry);
         $store->describe(new Stub\Entity(), 'whatever');

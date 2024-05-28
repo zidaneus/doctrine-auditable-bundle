@@ -47,7 +47,7 @@ class AuditableListener
     /**
      * Datetime with timezone format (ISO 8601)
      */
-    private const DATETIME_WITH_TIMEZONE_FORMAT = 'c';
+    private const string DATETIME_WITH_TIMEZONE_FORMAT = 'c';
 
     /**
      * Entity manager

@@ -38,14 +38,6 @@ final class AttributeTest extends TestCase
         $configuration->setProxyNamespace('Proxy\\' . __NAMESPACE__);
         $configuration->setMetadataDriverImpl(new StaticPHPDriver(__DIR__ . '/Stub'));
 
-        $eventManager = new EventManager();
-        $connection   = $this->getMockBuilder(Connection::class)
-            ->onlyMethods(['getEventManager'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $connection->method('getEventManager')->willReturn($eventManager);
-
         $em = new EntityManager(
             DriverManager::getConnection(
                 [

@@ -24,22 +24,23 @@ use Gtt\Bundle\DoctrineAuditableBundle\Entity\Group;
 use Gtt\Bundle\DoctrineAuditableBundle\Log\Store;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\User\InMemoryUser;
 
+use function assert;
+
 /**
  * Class AuditTest
  */
 final class AuditTest extends KernelTestCase
 {
-    private const MOCK_USER_NAME = 'das author!';
+    private const string MOCK_USER_NAME = 'das author!';
 
     private EntityManagerInterface $em;
-
-    private vfsStreamDirectory $projectRoot;
 
     protected static function getKernelClass(): string
     {
@@ -50,7 +51,7 @@ final class AuditTest extends KernelTestCase
     {
         $kernel = parent::createKernel($options);
         if (isset($options['cache_dir'])) {
-            \assert($kernel instanceof TestKernel);
+            assert($kernel instanceof TestKernel);
             $kernel->mockMethod('getCacheDir', static fn (): string => $options['cache_dir']);
         }
 
@@ -65,7 +66,7 @@ final class AuditTest extends KernelTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->projectRoot = vfsStream::setup('app', 0755, [
+        $projectRoot = vfsStream::setup('app', 0755, [
             'config' => [
                 'packages' => [],
             ],
@@ -74,7 +75,7 @@ final class AuditTest extends KernelTestCase
             ],
         ]);
 
-        $cacheDir = $this->projectRoot->url() . '/var/cache';
+        $cacheDir = $projectRoot->url() . '/var/cache';
         self::bootKernel(['cache_dir' => $cacheDir]);
 
         $this->em = self::getContainer()->get('doctrine.orm.default_entity_manager');
@@ -86,7 +87,7 @@ final class AuditTest extends KernelTestCase
             ->setToken(new PreAuthenticatedToken(new InMemoryUser(self::MOCK_USER_NAME, ''), 'main'));
 
         $warmer = self::getContainer()->get(AuditableMetadataWarmer::class);
-        \assert($warmer instanceof AuditableMetadataWarmer);
+        assert($warmer instanceof AuditableMetadataWarmer);
         $warmer->warmUp($cacheDir);
     }
 
@@ -134,9 +135,7 @@ final class AuditTest extends KernelTestCase
         self::assertSame('Total items change test', $group->getComment());
     }
 
-    /**
-     * @dataProvider orderDateTimeProvider
-     */
+    #[DataProvider(methodName: 'orderDateTimeProvider')]
     public function testDateTimeAuditing(
         Order $order,
         DateTimeInterface $oldDate,
@@ -170,7 +169,7 @@ final class AuditTest extends KernelTestCase
         $this->em->persist($order);
         $this->em->flush();
 
-        $order->setExecutedTs(new \DateTimeImmutable('2020-01-02T03:00:00+00:00'));
+        $order->setExecutedTs(new DateTimeImmutable('2020-01-02T03:00:00+00:00'));
         $this->em->flush();
 
         $entries = $this->getOrderChangesById($order->getId());
@@ -182,7 +181,7 @@ final class AuditTest extends KernelTestCase
     public function testNullableDateInValueAfter(): void
     {
         $order = new Order('test', 1);
-        $order->setExecutedTs(new \DateTimeImmutable('2020-01-02T03:00:00+00:00'));
+        $order->setExecutedTs(new DateTimeImmutable('2020-01-02T03:00:00+00:00'));
 
         $this->em->persist($order);
         $this->em->flush();

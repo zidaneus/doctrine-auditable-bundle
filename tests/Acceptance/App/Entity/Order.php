@@ -14,7 +14,7 @@ namespace Gtt\Bundle\DoctrineAuditableBundle\Acceptance\App\Entity;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use Gtt\Bundle\DoctrineAuditableBundle\Mapping\Annotation as Auditable;
+use Gtt\Bundle\DoctrineAuditableBundle\Mapping\Attribute as Auditable;
 
 /**
  * Class Order
@@ -52,73 +52,46 @@ class Order
         $this->postedTs   = new DateTime();
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomer(): string
     {
         return $this->customer;
     }
 
-    /**
-     * @return int
-     */
     public function getTotalItems(): int
     {
         return $this->totalItems;
     }
 
-    /**
-     * @param string $customer
-     */
     public function setCustomer(string $customer): void
     {
         $this->customer = $customer;
     }
 
-    /**
-     * @param int $totalItems
-     */
     public function setTotalItems(int $totalItems): void
     {
         $this->totalItems = $totalItems;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getPostedTs(): DateTime
     {
         return $this->postedTs;
     }
 
-    /**
-     * @param DateTime $postedTs
-     */
     public function setPostedTs(DateTime $postedTs): void
     {
         $this->postedTs = $postedTs;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
     public function getExecutedTs(): ?DateTimeImmutable
     {
         return $this->executedTs;
     }
 
-    /**
-     * @param DateTimeImmutable|null $executedTs
-     */
     public function setExecutedTs(?DateTimeImmutable $executedTs): void
     {
         $this->executedTs = $executedTs;

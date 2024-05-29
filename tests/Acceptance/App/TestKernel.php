@@ -62,7 +62,7 @@ final class TestKernel extends Kernel implements CompilerPassInterface
     /**
      * @param callable(ContainerBuilder): void|null $compilerPass
      */
-    public function setCompilerPass(?callable $compilerPass)
+    public function setCompilerPass(?callable $compilerPass): void
     {
         $this->compilerPass = $compilerPass;
     }
@@ -94,15 +94,14 @@ final class TestKernel extends Kernel implements CompilerPassInterface
     {
         $c->extension('framework', ['test' => true]);
         $c->extension('security', [
-            'enable_authenticator_manager' => true,
             'providers' => [
                 'in_memory' => [
-                    'memory' => true
+                    'memory' => true,
                 ],
             ],
             'firewalls' => [
                 'main' => null,
-            ]
+            ],
         ]);
 
         $c->extension('doctrine', [
@@ -116,7 +115,7 @@ final class TestKernel extends Kernel implements CompilerPassInterface
             ],
             'orm'  => [
                 'mappings' => [
-                    'App' => [
+                    'App'                     => [
                         'is_bundle' => false,
                         'type'      => 'attribute',
                         'prefix'    => 'Gtt\\Bundle\\DoctrineAuditableBundle\\Acceptance\\App\\Entity',
